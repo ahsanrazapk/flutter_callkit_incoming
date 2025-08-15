@@ -7,6 +7,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
 
@@ -88,13 +91,27 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val action = intent.action ?: return
         val data = intent.extras?.getBundle(CallkitConstants.EXTRA_CALLKIT_INCOMING_DATA) ?: return
+        val extra = data.getSerializable(CallkitConstants.EXTRA_CALLKIT_EXTRA) as? HashMap<*, *>
+
         when (action) {
             "${context.packageName}.${CallkitConstants.ACTION_CALL_INCOMING}" -> {
                 try {
-                    Log.d(TAG, null, "ACTION_CALL_INCOMING")
+
                     FlutterCallkitIncomingPlugin.notifyEventCallbacks(CallkitEventCallback.CallEvent.ACTION_CALL_INCOMING, data)
                     callkitNotificationManager?.showIncomingNotification(data)
-                    sendEventFlutter(CallkitConstants.ACTION_CALL_INCOMING, data)
+                    if(extra != null && (extra["from"]?.toString() ?: "") == "background"){
+                        val id = extra["callerId"]?.toString() ?: ""
+                        val callId = extra["callId"]?.toString() ?: ""
+                        sendCallStatus(
+                            mapOf(
+                                "id" to id,
+                                "call_status" to "InvitationReceivedByPeer",
+                                "call_id" to callId
+                            )
+                        )
+                    }else {
+                        sendEventFlutter(CallkitConstants.ACTION_CALL_INCOMING, data)
+                    }
                     addCall(context, Data.fromBundle(data))
                 } catch (error: Exception) {
                     Log.e(TAG, null, error)
@@ -137,10 +154,23 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
                 try {
                     // Log.d(TAG, "[CALLKIT] 📱 ACTION_CALL_DECLINE")           
                     // Notify native decline callbacks
-                    FlutterCallkitIncomingPlugin.notifyEventCallbacks(CallkitEventCallback.CallEvent.DECLINE, data)
+                   // FlutterCallkitIncomingPlugin.notifyEventCallbacks(CallkitEventCallback.CallEvent.DECLINE, data)
                     // clear notification
                     callkitNotificationManager?.clearIncomingNotification(data, false)
-                    sendEventFlutter(CallkitConstants.ACTION_CALL_DECLINE, data)
+
+                    if(extra != null && (extra["from"]?.toString() ?: "") == "background"){
+                        val id = extra["callerId"]?.toString() ?: ""
+                        val callId = extra["callId"]?.toString() ?: ""
+                        sendCallStatus(
+                            mapOf(
+                                "id" to id,
+                                "call_status" to "InvitationRefused",
+                                "call_id" to callId
+                            )
+                        )
+                    }else {
+                        sendEventFlutter(CallkitConstants.ACTION_CALL_DECLINE, data)
+                    }
                     removeCall(context, Data.fromBundle(data))
                 } catch (error: Exception) {
                     Log.e(TAG, null, error)
@@ -257,5 +287,26 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
             "android" to android
         )
         FlutterCallkitIncomingPlugin.sendEvent(event, forwardData)
+    }
+
+    private fun sendCallStatus(map : Map<String, Any?>) {
+        val request = CallData(
+            id = map["id"]?.toString() ?: "",
+            call_status = map["call_status"]?.toString() ?: "",
+            call_id = map["call_id"]?.toString() ?: ""
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = ApiClient.instance.updateCallStatus(request)
+                if (response.isSuccessful) {
+                    println("Call status updated successfully")
+                } else {
+                    println("Failed: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
