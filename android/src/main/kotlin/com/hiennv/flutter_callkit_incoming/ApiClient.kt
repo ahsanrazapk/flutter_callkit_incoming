@@ -9,7 +9,7 @@ object ApiClient {
 
     val instance: CallApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("https://prod-be.legalavenue.pk/")
+            .baseUrl("https://dev-be.legalavenue.pk/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
