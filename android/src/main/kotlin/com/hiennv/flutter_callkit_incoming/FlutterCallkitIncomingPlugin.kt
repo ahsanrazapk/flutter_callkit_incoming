@@ -187,6 +187,28 @@ class FlutterCallkitIncomingPlugin : FlutterPlugin, MethodCallHandler, ActivityA
         }
     }
 
+    public fun endCallsWhenAPPTerminate(){
+        val calls = getDataActiveCalls(context)
+        calls.forEach {
+            if (it.isAccepted) {
+                context?.sendBroadcast(
+                    CallkitIncomingBroadcastReceiver.getIntentEnded(
+                        requireNotNull(context),
+                        it.toBundle()
+                    )
+                )
+            } else {
+                context?.sendBroadcast(
+                    CallkitIncomingBroadcastReceiver.getIntentDecline(
+                        requireNotNull(context),
+                        it.toBundle()
+                    )
+                )
+            }
+        }
+        removeAllCalls(context)
+    }
+
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         try {
             when (call.method) {

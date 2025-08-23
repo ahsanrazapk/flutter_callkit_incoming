@@ -106,6 +106,10 @@ class CallkitNotificationService : Service() {
     }
 
 
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        FlutterCallkitIncomingPlugin.getInstance()?.endCallsWhenAPPTerminate()
+    }
 
 }
 
