@@ -12,8 +12,6 @@
     <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_PHONE_CALL"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
 
     <uses-permission android:name="com.hiennv.flutter_callkit_incoming.PERMISSION_CALL" />
@@ -63,7 +61,7 @@
         <service
             android:enabled="true"
             android:exported="true"
-            android:foregroundServiceType="phoneCall|microphone|camera|mediaPlayback"
+            android:foregroundServiceType="phoneCall|microphone"
             android:permission="com.hiennv.flutter_callkit_incoming.PERMISSION_CALL"
             android:name="com.hiennv.flutter_callkit_incoming.CallkitNotificationService">
         </service>
