@@ -75,6 +75,7 @@ class CallkitNotificationService : Service() {
     @SuppressLint("MissingPermission")
     private fun showOngoingCallNotification(bundle: Bundle) {
 
+
         val callkitNotification =
             this.callkitNotificationManager?.getOnGoingCallNotification(bundle, false)
         if (callkitNotification != null) {
