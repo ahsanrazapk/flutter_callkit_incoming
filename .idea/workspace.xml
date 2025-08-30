@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="57ed6448-1d16-42ed-ac7f-20465350de4f" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/ApiClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/ApiClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/Call.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/Call.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/CallkitConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/CallkitConstants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/FlutterCallkitIncomingPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/hiennv/flutter_callkit_incoming/FlutterCallkitIncomingPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Call.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Call.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/CallManager.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/CallManager.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftFlutterCallkitIncomingPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftFlutterCallkitIncomingPlugin.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/entities/call_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/entities/call_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flutter_callkit_incoming.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_callkit_incoming.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="end_call_fix_dev" />
+        <entry key="$PROJECT_DIR$" value="end_call_prod" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,7 +62,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "end__call__dev",
+    "git-widget-placeholder": "fix__speaker__dev",
     "last_opened_file_path": "/Users/macbookpro/Downloads/flutter_callkit_incoming",
     "show.migrate.to.gradle.popup": "false"
   }

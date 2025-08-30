@@ -29,6 +29,7 @@ class FlutterCallkitIncoming {
   /// Event.ACTION_CALL_CALLBACK - only Android (click action `Call back` from missed call notification)
   /// Event.ACTION_CALL_TOGGLE_HOLD - only iOS
   /// Event.ACTION_CALL_TOGGLE_MUTE - only iOS
+  /// Event.ACTION_CALL_TOGGLE_SPEAKER - only iOS
   /// Event.ACTION_CALL_TOGGLE_DMTF - only iOS
   /// Event.ACTION_CALL_TOGGLE_GROUP - only iOS
   /// Event.ACTION_CALL_TOGGLE_AUDIO_SESSION - only iOS
@@ -67,6 +68,10 @@ class FlutterCallkitIncoming {
   /// On Android, Nothing(only callback event listener).
   static Future muteCall(String id, {bool isMuted = true}) async {
     await _channel.invokeMethod("muteCall", {'id': id, 'isMuted': isMuted});
+  }
+
+  static Future speakerCall(String id, {bool isSpeaker = true}) async {
+    await _channel.invokeMethod("speakerCall", {'id': id, 'isSpeaker': isSpeaker});
   }
 
   /// Get Callkit Mic Status (muted/unmuted).

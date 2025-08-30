@@ -54,6 +54,12 @@ public class Call: NSObject {
         }
     }
     
+    var isSpeaker = false{
+        didSet{
+            
+        }
+    }
+    
     var hasStartedConnecting: Bool{
         get{
             return connectData != nil

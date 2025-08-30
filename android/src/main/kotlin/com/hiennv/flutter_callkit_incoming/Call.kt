@@ -132,6 +132,9 @@ data class Data(val args: Map<String, Any?>) {
     @JsonProperty("isMuted")
     var isMuted: Boolean = (args["isMuted"] as? Boolean) ?: false
 
+    @JsonProperty("isSpeaker")
+    var isSpeaker: Boolean = (args["isSpeaker"] as? Boolean) ?: false
+
     @JsonProperty("isShowFullLockedScreen")
     var isShowFullLockedScreen: Boolean = true
 

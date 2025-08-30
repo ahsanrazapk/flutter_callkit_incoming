@@ -12,6 +12,8 @@ object CallkitConstants {
         "com.hiennv.flutter_callkit_incoming.ACTION_CALL_ENDED"
     const val ACTION_CALL_TOGGLE_MUTE =
         "com.hiennv.flutter_callkit_incoming.ACTION_CALL_TOGGLE_MUTE"
+    const val ACTION_CALL_TOGGLE_SPEAKER =
+        "com.hiennv.flutter_callkit_incoming.ACTION_CALL_TOGGLE_SPEAKER"
     const val ACTION_CALL_TOGGLE_HOLD =
         "com.hiennv.flutter_callkit_incoming.ACTION_CALL_TOGGLE_HOLD"
     const val ACTION_CALL_TIMEOUT =

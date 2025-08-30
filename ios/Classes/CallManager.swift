@@ -7,6 +7,8 @@
 
 import Foundation
 import CallKit
+import AVFAudio
+
 
 @available(iOS 10.0, *)
 class CallManager: NSObject {
@@ -39,6 +41,17 @@ class CallManager: NSObject {
             callUpdate.localizedCallerName = data.nameCaller
             self.sharedProvider?.reportCall(with: uuid!, updated: callUpdate)
         })
+    }
+    
+    
+    func toggleSpeaker(call: Call, isSpeaker: Bool) {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.overrideOutputAudioPort(isSpeaker ? .speaker : .none)
+            try session.setActive(true)
+        } catch {
+            print("Error toggling speaker: \(error.localizedDescription)")
+        }
     }
     
     func muteCall(call: Call, isMuted: Bool) {
