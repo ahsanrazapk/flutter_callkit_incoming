@@ -593,12 +593,10 @@ class CallkitNotificationManager(
         data: Bundle, isConnected: Boolean? = false
     ): CallkitNotification? {
 
-        val callingId = data.getString(
+        val onGoingNotificationId = data.getString(
             CallkitConstants.EXTRA_CALLKIT_CALLING_ID,
             data.getString(CallkitConstants.EXTRA_CALLKIT_ID, "callkit_incoming")
-        )
-
-        val onGoingNotificationId = ("ongoing_$callingId").hashCode()
+        ).hashCode()
 
         notificationOngoingBuilder = NotificationCompat.Builder(
             context, NOTIFICATION_CHANNEL_ID_ONGOING
